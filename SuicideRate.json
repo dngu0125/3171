@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Suicide rate around the word",
+  "title": "Suicide rate around the world",
   "width": 1280,
   "height": 720,
   "projection": {"type": "equalEarth"},
