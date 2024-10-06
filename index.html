@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Vega-Lite Bar Chart</title>
+    <title>Suicide Rate around the world</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +9,68 @@
     <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.21.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
+      <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+  integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <!-- CSS file -->
+    <link rel="stylesheet" type="text/css" href="styles.css" media="all">
     <script src="vega_lite_vis.js"></script>
     
   </head>
+
   <body>
-    <div id="bar_chart">
+    <div class="page">
+
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-1-1">
+          <center><h1>Suicide Rate around the world</h1></center>
+          <p>From looking at the map below, one can assume that the stronger a country's economy is, the more likely 
+            people will suicide. However, There are many outlier that put the statement into question. </p>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <!-- pure grid group -->
+      <div class="pure-g">
+        <div class="pure-u-1-1" >
+          <div id="vis1" class="vis-container" style="width: 100%;">
+          </div>
+        </div>
+      </div>
+      <!-- end pure grid group -->
+
+      <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <p>It can be seen that although the map shows a relationship between economy and suicide rate, The bubble chart shows otherwise with most of
+          countries having similar suicide rate and umeployment rate. The GDP of countries also seems to not affect the suicide rate as 2 nations with similar suicide 
+        rate can have 2 vastly different GDP. </p>
+      </div>
+      <div class="pure-u-2-3">
+        <div class="description description-right">
+          <div id="vis2" class="vis-container"></div>
+        </div>
+      </div>
+
     </div>
-    
+    <!-- end pure grid group -->
+
+      <div class="pure-g">
+        <div class="pure-u-1-1 small-font">
+         <p>This visualisation is created by Duc Tri, 32294166. The datasource is <a href="https://www.workwithdata.com/datasets/countries" target=" _blank">workwithdata</href>.</p>
+        </div>
+      </div>
+
+    </div>
+  
+
   </body>
 </html>

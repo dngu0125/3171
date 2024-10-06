@@ -1,0 +1,123 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Suicide rate vs Unemployment around the world",
+    "width": 700,
+    "height": 400,
+    "data": {
+          "url": "Countrydata.csv"
+    },
+    "params": [
+        {
+        "name": "Population_Above",
+        "value": 0,
+        "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 233600000,
+        "step": 100000,
+        "name": "Minimum Population: "
+        }},
+        {
+            "name": "suicide_Above",
+            "value": 0,
+            "bind": {
+            "input": "range",
+            "min": 0,
+            "max": 41,
+            "step": 0.5,
+            "name": "Suicide Rate beyond: "
+            }
+    }],
+
+    "transform": [
+        {"filter": "datum.unemployment > 0"},
+        {"filter": "datum.suicidemortalityrate > suicide_Above"},
+        {"filter": "datum.GDP > 0"},
+        {"filter": "datum.population > Population_Above"}
+    ],
+    "encoding": {
+        "x": {
+        "field": "unemployment",
+        "type": "quantitative",
+        "axis": {"tickCount": 20},
+        "scale": {"domain": [0, 38]},
+        "title":"Unemployment (%)"
+        },
+        "y": {
+        "field": "suicidemortalityrate",
+        "type": "quantitative",
+        "title": "Suicide rate (per 100,000 population)",
+        "axis": {"tickCount": 20},
+        "scale": {"domain": [0, 75]}
+        }
+    },
+    "layer": [
+        {
+            "mark": {
+              "type": "text",
+              "align": "center",
+              "baseline": "middle",
+              "dy": 15,
+              "dx":0,
+              "fontSize": 11.5,
+              "fontStyle": "italic"
+            },
+            "encoding": {
+              "tooltip":null,
+              "text": {"field": "country", "type": "nominal"},
+              "color": {"value": "black"},
+              "opacity": {
+                "condition": {
+                  "test": "datum['country'] == 'Korea' || datum['country'] == 'Eswatini' || datum['country'] == 'Philippines' || datum['country'] == 'China' || datum['country'] == 'Lesotho' || datum['country'] == 'Australia' || datum['country'] == 'South Africa' || datum['country'] == 'Spain' || datum['country'] == 'Yemen' ||  datum['country'] == 'United States'",
+                  "value": 1
+                },
+                "value": 0
+              }
+            }
+          },
+    
+    {
+      "mark": "circle",
+      "encoding": {
+        "size": {
+          "field": "population",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
+            "range": [10, 50, 150, 200, 300, 400]
+          },
+          "legend": {"format": ".1s"}
+        },
+        "color": {
+          "field": "continent",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+            "America",
+            "Europe",
+            "Africa",
+            "Asia",
+            "Oceania"
+            ],
+            "range": [
+            "#e41a1c",
+            "#ff7f00",
+            "#984ea3",
+            "#377eb8",
+            "#a65628"
+            ]
+        }},
+        "opacity": {"value": 0.6},
+        "tooltip": [
+          {"field": "country", "type": "nominal", "title":"Country"},
+          {"field": "continent", "type": "nominal", "title":"Continent"},
+          {"field": "population", "type": "quantitative", "format": ".3s", "title":"Population (people)"},
+          {"field": "suicidemortalityrate", "type": "quantitative", "format": ",", "title":"Suicide rate per 100,000 population"},
+          {"field": "unemployment", "type": "quantitative", "format": ",", "title":"Unemployment (%)"},
+          {"field": "MillionGDP", "type": "quantitative", "format": ".3s", "title":"GPD (Million USD)"}
+        ] 
+      }
+    }
+  ]
+}
