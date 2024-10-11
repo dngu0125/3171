@@ -1,0 +1,35 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Top 10 lowest",
+    "data": {"url": "Countrydata.csv"},
+    "mark": "bar",
+    "transform": [
+        {"filter": "datum.suicidemortalityrate >0"},
+        {"filter": "datum.suicidemortalityrate >0"},
+      {
+        "aggregate": [{"op": "mean", "field": "suicidemortalityrate", "as": "suicide"}],
+        "groupby": ["country"]
+      },
+      {
+        "window": [{"op": "row_number", "as": "rank"}],
+        "sort": [{ "field": "suicide", "order": "ascending" }]
+      },
+      {
+        "filter": "datum.rank <= 10"
+      }
+    ],
+    "encoding": {
+      "x": {
+        "aggregate": "mean",
+        "field": "suicide",
+        "type": "quantitative",
+        "title": "Suicide per 100,000 population"
+      },
+      "y": {
+        "sort": {"op": "mean", "field": "suicide", "order": "ascending"},
+        "field": "country",
+        "type": "ordinal",
+        "title": null
+      }
+    }
+  }

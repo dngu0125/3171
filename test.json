@@ -1,0 +1,29 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Top 10 highest",
+    "width": 300,
+    "height": 500,
+    "data": {"url": "Countrydata.csv"},
+    "mark": "bar",
+    "transform": [
+        {"fold": ["male population", "female population"], "as": ["key", "value"]}
+    ],
+    "encoding": {
+      "x": {
+        "field": "value",
+        "type": "quantitative",
+        "title": "Suicide per 100,000 population",
+        "stack": "normalize"
+      },
+      "y": {
+        "sort": {"op":"mean", "field": "suicidemortalityrate", "order":"descending"},
+        "field": "country",
+        "type": "ordinal",
+        "title": null
+      },
+      "color": {
+      "type": "nominal",
+      "field": "key"
+    }
+    }
+  }
