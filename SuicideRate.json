@@ -1,8 +1,11 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Suicide rate around the world",
-  "width": 1000,
+  "title":{"text":"Suicides (per 100,000 population) around the world",
+        "fontSize": 20
+  },
+  "width": 1280,
   "height": 600,
+  "background": null,
   "projection": {"type": "equalEarth"},
   "layer": [
     {
@@ -30,7 +33,7 @@
           "url": "Countrydata.csv"
         },
         "key": "ISO 3 country code",
-        "fields": ["suicidemortalityrate"]
+        "fields": ["suicidemortalityrate","country","continent","population","unemployment","MillionGDP"]
       }
     }
     
@@ -46,14 +49,17 @@
         "range": ["#fee5d9","#fcbba1","#fc9272","#fb6a4a","#de2d26","#a50f15"]
       },
       "legend": {
-        "title": "Suicides (per 100,000 population)"
+        "title": null
       }
     },
-    "tooltip":[
-      {"field": "properties.NAME", "type": "nominal", "title":
-"Country"},
-{"field": "suicidemortalityrate", "type": "quantitative", "title":"Suicides per 100,000 population:"}
-    ]
+    "tooltip": [
+          {"field": "country", "type": "nominal", "title":"Country"},
+          {"field": "continent", "type": "nominal", "title":"Continent"},
+          {"field": "population", "type": "quantitative", "format": ".3s", "title":"Population (people)"},
+          {"field": "suicidemortalityrate", "type": "quantitative", "format": ",", "title":"Suicide rate per 100,000 population"},
+          {"field": "unemployment", "type": "quantitative", "format": ",", "title":"Unemployment (%)"},
+          {"field": "MillionGDP", "type": "quantitative", "format": ".3s", "title":"GPD (Million USD)"}
+        ] 
   }
   },
   {
@@ -63,5 +69,13 @@
   }, 
   "mark": {"type": "geoshape","stroke":"grey","strokeWidth":0.25,"fill":null}
   }
-  ]
+  ],
+  "config": {
+    "legend": {
+      "orient": "top", 
+      "layout": {"top": {"anchor": "middle"}},
+      "padding":10,
+      "offset": 10
+    }
+  }
 }

@@ -1,5 +1,5 @@
 body *{
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 h1 {
@@ -8,7 +8,7 @@ h1 {
 }
 
 body {
-    background-color: lightgray;
+    background-color: black;
 }
 
 .page {
@@ -29,14 +29,14 @@ h1 {
 }
 
 .description-right {
-    padding-left: 20px;
+    padding-left: 15px;
 }
 
 .description-left {
-    padding-right: 20px;
+    padding-right: 15px;
 }
 
-.pure-g {
+.pure-g-end {
     margin-bottom: 40px;
 }
 

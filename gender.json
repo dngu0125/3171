@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Gender distribution for the top 10 highest suicide rate",
+    "title": "Gender distribution for the top 10 lowest suicide rate",
     "background": null,
     "height": 200,
     "width": 400,
@@ -11,22 +11,22 @@
         {"filter": "datum.unemployment > 0"},
         {"filter": "datum.GDP > 0"},
         {"filter": "datum['press freedom'] > 0"},
-        {"filter": "datum.suicidemortalityrate > 21"},
+        {"filter": "datum.suicidemortalityrate > 0"},
+        {"filter": "datum.suicidemortalityrate < 2.8"},
         {
-          "filter": "datum.country !== 'Belarus'"
+          "filter": "datum.country !== 'Maldives'"
         }
     ],
     "encoding": {
       "x": {
         "field": "value",
         "type": "quantitative",
-        "title": "Suicide per 100,000 population",
+        "title": null,
         "stack": "normalize",
-        "axis":{"grid": false},
-        "title": null
+        "axis":{"grid": false}
       },
       "y": {
-        "sort": {"op":"mean", "field": "suicidemortalityrate", "order":"descending"},
+        "sort": {"op":"mean", "field": "suicidemortalityrate", "order":"ascending"},
         "field": "country",
         "type": "ordinal",
         "title": null,
@@ -38,9 +38,7 @@
       "scale": {
         "range": ["#E6A6C7", "#2768A4"]
       },
-      "legend": {
-        "labelExpr": "{'female population': 'Female', 'male population': 'Male'}[datum.label]"
-      }
+      "legend": null
     },
     "tooltip":[
       {"field": "continent", "type": "nominal", "title":"Continent"},
@@ -48,5 +46,10 @@
       {"field": "male population", "type": "quantitative", "format": ".3s", "title":"Memale Population (people)"},
       {"field": "suicidemortalityrate", "type": "quantitative", "format": ",", "title":"Suicide rate per 100,000 population"}
     ]
-    }
+    },
+    "config": {
+  "view": {
+     "stroke": "transparent"
+  }
+}
   }

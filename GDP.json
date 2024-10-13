@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Suicide rate (per 100,000 population) vs Unemployment",
+    "title": "Suicide rate (per 100,000 population) vs GDP per capita",
     "width": 500,
     "height": 300,
     "background": null,
@@ -35,15 +35,16 @@
         {"filter": "datum.suicidemortalityrate > suicide_Above"},
         {"filter": "datum.GDP > 0"},
         {"filter": "datum['press freedom'] > 0"},
-        {"filter": "datum.population > Population_Above"}
+        {"filter": "datum.population > Population_Above"},
+        {"calculate": "datum.GDP/datum.population", "as": "GDPper"}
     ],
     "encoding": {
         "x": {
-        "field": "unemployment",
+        "field": "GDPper",
         "type": "quantitative",
-        "axis": {"tickCount": 12},
-        "scale": {"domain": [0, 38]},
-        "title":"Unemployment (%)"
+        "axis": {"tickCount": 5},
+        "scale":{"domain":[100, 200000],"type": "log"},
+        "title":"GDP per capita (USD)"
         },
         "y": {
         "field": "suicidemortalityrate",
@@ -90,7 +91,7 @@
             "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
             "range": [10, 50, 150, 200, 300, 500]
           },
-          "legend": null
+          "legend": {"format": ".1s"}
         },
         "color": {
           "field": "continent",
@@ -110,8 +111,7 @@
                 "#984ea3",
                 "#ff7f00"
             ]
-        },
-      "legend":null},
+        }},
         "opacity": {"value": 0.6},
         "tooltip": [
           {"field": "country", "type": "nominal", "title":"Country"},

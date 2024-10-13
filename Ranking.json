@@ -1,12 +1,19 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": "Top 10 highest",
+  "title": "Top 10 highest suicide rate",
   "data": {"url": "Countrydata.csv"},
+  "background": null,
+  "height": 200,
+  "width": 400,
   "mark": "bar",
   "transform": [
+    {"filter": "datum.unemployment > 0"},
+    {"filter": "datum.GDP > 0"},
+    {"filter": "datum['press freedom'] > 0"},
+    {"filter": "datum.suicidemortalityrate >0"},
     {
       "aggregate": [{"op": "mean", "field": "suicidemortalityrate", "as": "suicide"}],
-      "groupby": ["country"]
+      "groupby": ["country","continent","population","unemployment","MillionGDP"]
     },
     {
       "window": [{"op": "row_number", "as": "rank"}],
@@ -21,13 +28,42 @@
       "aggregate": "mean",
       "field": "suicide",
       "type": "quantitative",
-      "title": "Suicide per 100,000 population"
+      "title": "Suicides (per 100,000 population)",
+      "axis": {"tickCount": 5},
+      "scale": {"domain": [0, 80]}
     },
     "y": {
       "sort": {"op": "mean", "field": "suicide", "order": "descending"},
       "field": "country",
       "type": "ordinal",
       "title": null
-    }
+    },
+    "color": {
+          "field": "continent",
+          "title": "Continent",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+            "America",
+            "Europe",
+            "Africa",
+            "Asia",
+            "Oceania"
+            ],
+            "range": ["#e41a1c",
+                "#377eb8",
+                "#4daf4a",
+                "#984ea3",
+                "#ff7f00"
+            ]
+        }},
+    "tooltip": [
+          {"field": "country", "type": "nominal", "title":"Country"},
+          {"field": "continent", "type": "nominal", "title":"Continent"},
+          {"field": "population", "type": "quantitative", "format": ".3s", "title":"Population (people)"},
+          {"field": "suicide", "type": "quantitative", "format": ",", "title":"Suicide rate per 100,000 population"},
+          {"field": "unemployment", "type": "quantitative", "format": ",", "title":"Unemployment (%)"},
+          {"field": "MillionGDP", "type": "quantitative", "format": ".3s", "title":"GPD (Million USD)"}
+        ]
   }
 }

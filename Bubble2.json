@@ -1,8 +1,9 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Suicide rate vs Unemployment around the world",
-    "width": 700,
-    "height": 400,
+    "title": {"text":"Suicide rate (per 100,000 population) vs Press Freedom"},
+    "width": 500,
+    "height": 300,
+    "background": null,
     "data": {
           "url": "Countrydata.csv"
     },
@@ -33,20 +34,22 @@
         {"filter": "datum.unemployment > 0"},
         {"filter": "datum.suicidemortalityrate > suicide_Above"},
         {"filter": "datum.GDP > 0"},
+        {"filter": "datum['press freedom'] > 0"},
         {"filter": "datum.population > Population_Above"}
     ],
     "encoding": {
         "x": {
         "field": "[press freedom]",
         "type": "quantitative",
-        "axis": {"tickCount": 20},
-        "title":"Press freedom (%)"
+        "axis": {"tickCount": 12},
+        "scale": {"domain": [0, 11]},
+        "title":"Press freedom"
         },
         "y": {
         "field": "suicidemortalityrate",
         "type": "quantitative",
-        "title": "Suicide rate (per 100,000 population)",
-        "axis": {"tickCount": 20},
+        "title": null,
+        "axis": {"tickCount": 12},
         "scale": {"domain": [0, 75]}
         }
     },
@@ -67,7 +70,7 @@
               "color": {"value": "black"},
               "opacity": {
                 "condition": {
-                  "test": "datum['country'] == 'Korea' || datum['country'] == 'Eswatini' || datum['country'] == 'Philippines' || datum['country'] == 'China' || datum['country'] == 'Lesotho' || datum['country'] == 'Australia' || datum['country'] == 'South Africa' || datum['country'] == 'Spain' || datum['country'] == 'Yemen' ||  datum['country'] == 'United States'",
+                  "test": "datum['country'] == 'Guyana' || datum['country'] == 'Eswatini' || datum['country'] == 'Barbados' || datum['country'] == 'Lesotho' || datum['country'] == 'Australia' || datum['country'] == 'South Africa' || datum['country'] == 'China' || datum['country'] == 'Korea' ||  datum['country'] == 'United States'",
                   "value": 1
                 },
                 "value": 0
@@ -76,20 +79,22 @@
           },
     
     {
-      "mark": "circle",
+      "mark":"point",
       "encoding": {
         "size": {
           "field": "population",
           "type": "quantitative",
+          "title": "Population",
           "scale": {
             "type": "threshold",
-            "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
-            "range": [10, 50, 150, 200, 300, 400]
+            "domain": [1],
+            "range": [150]
           },
-          "legend": {"format": ".1s"}
+          "legend": null
         },
         "color": {
           "field": "continent",
+          "title": "Continent",
           "type": "nominal",
           "scale": {
             "domain": [
@@ -99,12 +104,11 @@
             "Asia",
             "Oceania"
             ],
-            "range": [
-            "#e41a1c",
-            "#ff7f00",
-            "#984ea3",
-            "#377eb8",
-            "#a65628"
+            "range": ["#e41a1c",
+                "#377eb8",
+                "#4daf4a",
+                "#984ea3",
+                "#ff7f00"
             ]
         }},
         "opacity": {"value": 0.6},
@@ -115,7 +119,7 @@
           {"field": "suicidemortalityrate", "type": "quantitative", "format": ",", "title":"Suicide rate per 100,000 population"},
           {"field": "unemployment", "type": "quantitative", "format": ",", "title":"Unemployment (%)"},
           {"field": "MillionGDP", "type": "quantitative", "format": ".3s", "title":"GPD (Million USD)"}
-        ] 
+        ]
       }
     }
   ]

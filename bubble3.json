@@ -1,6 +1,6 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Suicide rate (per 100,000 population) vs Unemployment",
+    "title": "Suicide rate (per 100,000 population) vs Democracy score",
     "width": 500,
     "height": 300,
     "background": null,
@@ -39,11 +39,11 @@
     ],
     "encoding": {
         "x": {
-        "field": "unemployment",
+        "field": "[democracy score]",
         "type": "quantitative",
         "axis": {"tickCount": 12},
-        "scale": {"domain": [0, 38]},
-        "title":"Unemployment (%)"
+        "scale": {"domain": [0, 11]},
+        "title":"Democracy Score"
         },
         "y": {
         "field": "suicidemortalityrate",
@@ -79,7 +79,7 @@
           },
     
     {
-      "mark": "circle",
+      "mark":"point",
       "encoding": {
         "size": {
           "field": "population",
@@ -87,8 +87,8 @@
           "title": "Population",
           "scale": {
             "type": "threshold",
-            "domain": [1000000, 10000000, 50000000, 100000000, 500000000],
-            "range": [10, 50, 150, 200, 300, 500]
+            "domain": [1],
+            "range": [150]
           },
           "legend": null
         },
@@ -110,8 +110,7 @@
                 "#984ea3",
                 "#ff7f00"
             ]
-        },
-      "legend":null},
+        }},
         "opacity": {"value": 0.6},
         "tooltip": [
           {"field": "country", "type": "nominal", "title":"Country"},
@@ -120,7 +119,7 @@
           {"field": "suicidemortalityrate", "type": "quantitative", "format": ",", "title":"Suicide rate per 100,000 population"},
           {"field": "unemployment", "type": "quantitative", "format": ",", "title":"Unemployment (%)"},
           {"field": "MillionGDP", "type": "quantitative", "format": ".3s", "title":"GPD (Million USD)"}
-        ] 
+        ]
       }
     }
   ]
