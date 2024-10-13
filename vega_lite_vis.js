@@ -22,7 +22,7 @@ var vg_6 = "RankingLowest.json";
 vegaEmbed("#vis6", vg_6).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
-var vg_7 = "Suiciderate.json";  
+var vg_7 = "SuicideRate.json";  
 vegaEmbed("#vis7", vg_7).then(function(result) {
 // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
 }).catch(console.error);
